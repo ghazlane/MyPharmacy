@@ -1,7 +1,10 @@
-@extends('layouts.app')
-
-@section('content')
-<style>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Place Autocomplete</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
       #map {
@@ -81,113 +84,8 @@
         padding: 6px 12px;
       }
     </style>
-
-<div class="container">
-     <div class="jumbotron jumbotron-fluid">
-  <div class="container">
-    <h1 class="display-4">Fluid jumbotron</h1>
-    <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
-  </div>
-</div>
-    <div class="row justify-content-center">
-        <div class="col-md-10" >
-            <div class="card">
-                <div class="card-header"><center><strong>{{ __('Créer un nouveau compte') }}</strong></center></div>
-                <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
-                        @csrf
-                        <div class="form-group row">
-                            <label title="Ce champ est obligatoire ! Ce champ sera validé avant la création du compte" for="num_ordre" class="col-md-4 col-form-label text-md-right">{{ __('Numéro d\'ordre de la pharmacie') }}</label>
-                            <div class="col-md-6">
-                                <input id="num_ordre" type="text" class="form-control @error('num_ordre') is-invalid @enderror" name="num_ordre" value="{{ old('num_ordre') }}" required autocomplete="num_ordre" autofocus>
-
-                                @error('num_ordre')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="telephone_fixe" class="col-md-4 col-form-label text-md-right">{{ __('Numéro de téléphone (Fixe) ') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="telephone_fixe" type="text" class="form-control @error('telephone_fixe') is-invalid @enderror" name="telephone_fixe" value="{{ old('telephone_fixe') }}" required autocomplete="telephone_fixe" autofocus>
-
-                                @error('telephone_fixe')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="categorie" class="col-md-4 col-form-label text-md-right">{{ __('categorie') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="categorie" type="text" class="form-control @error('categorie') is-invalid @enderror" name="categorie" value="{{ old('categorie') }}" required autocomplete="categorie">
-
-                                @error('categorie')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                           <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-                                                <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
-                        </div>
-
-
-       <div class="form-group row">
-                            <label for="ville" class="col-md-4 col-form-label text-md-right">{{ __('Ville') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="ville" type="text" class="form-control @error('ville') is-invalid @enderror" name="ville" value="{{ old('ville') }}" required autocomplete="ville">
-
-                                @error('ville')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-
-
-
-
-                 
-
-
-                                <input id="localisation_d" type="text" class="form-control @error('localisation_d') is-invalid @enderror" name="localisation_d" value="{{ old('localisation_d') }}" required autocomplete="localisation_d" autofocus>
-
-                            
-
-                                <input id="localisation_g" type="text" class="form-control @error('localisation_g') is-invalid @enderror" name="localisation_g" value="{{ old('localisation_g') }}" required autocomplete="localisation_g" autofocus>
-                            
-<br> 
-<div style="width: 100%; height: 500px;">
-    
+  </head>
+  <body>
     <div class="pac-card" id="pac-card">
       <div>
         <div id="title">
@@ -213,7 +111,7 @@
       </div>
       <div id="pac-container">
         <input id="pac-input" type="text"
-            placeholder="Enter a location" name="adresse">
+            placeholder="Enter a location">
       </div>
     </div>
     <div id="map"></div>
@@ -237,14 +135,10 @@
         var input = document.getElementById('pac-input');
         var types = document.getElementById('type-selector');
         var strictBounds = document.getElementById('strict-bounds-selector');
-        var options = {
-  types: ['(cities)'],
-  componentRestrictions: {country: "ma"}
- };
 
         map.controls[google.maps.ControlPosition.TOP_RIGHT].push(card);
 
-        var autocomplete = new google.maps.places.Autocomplete(input,options);
+        var autocomplete = new google.maps.places.Autocomplete(input);
 
         // Bind the map's bounds (viewport) property to the autocomplete object,
         // so that the autocomplete requests use the current map bounds for the
@@ -282,8 +176,6 @@
             map.setZoom(17);  // Why 17? Because it looks good.
           }
           marker.setPosition(place.geometry.location);
-            document.getElementById('localisation_d').value = place.geometry.location.lng(); 
-            document.getElementById('localisation_g').value = place.geometry.location.lat(); 
           marker.setVisible(true);
 
           var address = '';
@@ -324,19 +216,5 @@
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_gxHxXr6QeB71Nfqrgzkrd6zqrH_JBu8&libraries=places&callback=initMap"
         async defer></script>
-</div>
-
-                     <br><br>   <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    <center>{{ __('Créer un compte') }}</center>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-@endsection
+  </body>
+</html>

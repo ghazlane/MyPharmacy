@@ -22,3 +22,9 @@ Route::get('/Accueil', function(){
 	return view('Accueil');
 }); 
 
+
+Route::get('/DemandeMedicaments', function(){
+	return view('DemandeMedicaments'); 
+});
+
+

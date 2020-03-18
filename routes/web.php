@@ -1,8 +1,8 @@
 <?php
 
 /*
-|--------------------------------------------------------------------------
 | Web Routes
+|--------------------------------------------------------------------------
 |--------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
@@ -23,8 +23,6 @@ Route::get('/Accueil', function(){
 }); 
 
 
-Route::get('/DemandeMedicaments', function(){
-	return view('DemandeMedicaments'); 
-});
+Route::get('/DemandeMedicaments', 'PharmacieController@getListVille'); 
 
 

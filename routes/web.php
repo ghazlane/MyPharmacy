@@ -24,5 +24,6 @@ Route::get('/Accueil', function(){
 
 
 Route::get('/DemandeMedicaments', 'PharmacieController@getListVille'); 
-
+Route::resource('demandeMedicaments', 'DemandeController');
+Route::get('/ListeDemandes/{id}', 'DemandeController@getListDemandeByIdPharmacie'); 
 

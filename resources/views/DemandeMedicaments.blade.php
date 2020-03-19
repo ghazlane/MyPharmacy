@@ -13,7 +13,8 @@
                             <h4 class="mb-0"><center>Créer une nouvelle demande</center></h4>
                         </div>
                         <div class="card-body">
-                            <form class="form" role="form" autocomplete="off">
+                            <form class="form" role="form" method="POST" action="{{ route('demandeMedicaments.store') }}" enctype="multipart/form-data" >
+                               @csrf
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label form-control-label">Ville</label>
                                     <div class="col-lg-9">
@@ -28,7 +29,7 @@
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label form-control-label">Choisissez votre Pharmacie</label>
                                     <div class="col-lg-9">
-                                         <select class="form-control js-example-basic-single" id="listeAdresse">
+                                         <select class="form-control js-example-basic-single" id="listeAdresse" name="id_pharmacie">
                                           
      
     </select>
@@ -38,20 +39,33 @@
                                     <label class="col-lg-3 col-form-label form-control-label">Numéro de la carte d'identité nationale ( CIN ) </label>
                                     <div class="col-lg-9">
                                        <div class="custom-file">
-  <input type="file" class="custom-file-input" id="customFile" name="cin">
-  <label class="custom-file-label" for="customFile">Choose file</label>
-</div>
+          <label class="custom-file-label" id="namecin" for="cininput">Seleccione una imagen</label>
+          <input type="file" accept="image/*" class="custom-file-input" id="cininput" name="cin">
+          <i style="display: none;" id="msgcin1">Formato válido para los archivos: jpg, png, svg.</i>
+          <i style="display: none;" id="msjFilecin1">El peso máximo para el archivo es de: 2M</i>
+            </div>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label form-control-label">Ordonnance</label>
                                     <div class="col-lg-9">
                                         <div class="custom-file">
-  <input type="file" class="custom-file-input" id="customFile" name="ordonnance">
-  <label class="custom-file-label" for="customFile">Choose file</label>
-</div>
+          <label class="custom-file-label" id="nameFile1" for="customFile1">Seleccione una imagen</label>
+          <input type="file" accept="image/*" class="custom-file-input" id="customFile1" name="ordonnance">
+          <i style="display: none;" id="msjFile1">Formato válido para los archivos: jpg, png, svg.</i>
+          <i style="display: none;" id="msjFilePeso1">El peso máximo para el archivo es de: 2M</i>
+            </div>
                                     </div>
                                 </div>
+                                <br>
+                                <center>
+                                 <div class="form-group row mb-0">
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                                    {{ __('Envoyer la demande') }}
+                                </button>
+                            </div>
+                        </div></center>
 
                                 
                               </form>
@@ -94,5 +108,137 @@ $("#listeVille" ).change(function() {
 }
   @endforeach
 });
+
+
+
+
+// Primero capturamos la imagen, o archivo.
+    var archivo = document.getElementById('customFile1');
+
+    archivo.addEventListener('change', function(e) {
+        var file = e.target.files[0];
+        var files = e.target.files || e.dataTransfer.files;
+        if (!files.length){
+            return;
+        }
+        createImage(files[0]);
+    });
+    
+    // Esta funcion practicamente se explica sola.
+
+    function createImage(file) {
+        var exten = file.type;
+        var peso = file.size;
+        // Si quieres agregar una extención más para validar solo agregala.
+        if(exten == 'image/jpeg' || exten == 'image/png' || exten == 'image/svg')
+        {
+            // Si quieres cambiar el peso máximo para la imagen solo edita los números.
+            if(peso > 2000000)
+            {
+                colorInputImagen();
+                siPesoExede();
+            }else{
+                siTodoBien(file.name)
+            }
+        }else{
+            colorInputImagen()
+            siFormatoError();
+        }
+    };
+    
+    // Funciones que se utilizaran para los colores y los mensajes.
+
+    function colorInputImagen(){
+        document.getElementById('nameFile1').style.cssText="border: solid 1px red;"
+        setTimeout(() => {
+        document.getElementById('nameFile1').style.cssText="border: solid 1px #DFDFDF;"
+        },3000)
+    };
+
+    function siFormatoError(){
+        document.getElementById('msjFile1').style.cssText="color: red; display: block";
+        document.getElementById('msjFilePeso1').style.cssText="display: none";
+        document.getElementById('nameFile1').innerHTML = '';
+        document.getElementById('customFile1').value = '';
+    };
+
+    function siPesoExede(){
+        document.getElementById('customFile1').value = '';
+        document.getElementById('nameFile1').innerHTML = '';
+        document.getElementById('msjFile1').style.cssText="display: none";
+        document.getElementById('msjFilePeso1').style.cssText="display: block; color: red";
+    };
+
+    function siTodoBien(nombre){
+        document.getElementById('nameFile1').innerHTML = nombre;
+        document.getElementById('msjFile1').style.cssText="display: none";
+        document.getElementById('msjFilePeso1').style.cssText="display: none";
+    }
+
+
+
+
+    // Primero capturamos la imagen, o archivo.
+    var archivo2 = document.getElementById('cininput');
+
+    archivo2.addEventListener('change', function(e) {
+        var file = e.target.files[0];
+        var files = e.target.files || e.dataTransfer.files;
+        if (!files.length){
+            return;
+        }
+        createImage2(files[0]);
+    });
+    
+    // Esta funcion practicamente se explica sola.
+
+    function createImage2(file) {
+        var exten = file.type;
+        var peso = file.size;
+        // Si quieres agregar una extención más para validar solo agregala.
+        if(exten == 'image/jpeg' || exten == 'image/png' || exten == 'image/svg')
+        {
+            // Si quieres cambiar el peso máximo para la imagen solo edita los números.
+            if(peso > 2000000)
+            {
+                colorInputImagen2();
+                siPesoExede2();
+            }else{
+                siTodoBien2(file.name)
+            }
+        }else{
+            colorInputImagen2(); 
+            siFormatoError2();
+        }
+    };
+    
+    // Funciones que se utilizaran para los colores y los mensajes.
+
+    function colorInputImagen2(){
+        document.getElementById('namecin').style.cssText="border: solid 1px red;"
+        setTimeout(() => {
+        document.getElementById('namecin').style.cssText="border: solid 1px #DFDFDF;"
+        },3000)
+    };
+
+    function siFormatoError2(){
+        document.getElementById('msgcin1').style.cssText="color: red; display: block";
+        document.getElementById('msjFilecin1').style.cssText="display: none";
+        document.getElementById('namecin').innerHTML = '';
+        document.getElementById('customFile1').value = '';
+    };
+
+    function siPesoExede2(){
+        document.getElementById('customFile1').value = '';
+        document.getElementById('namecin').innerHTML = '';
+        document.getElementById('msgcin1').style.cssText="display: none";
+        document.getElementById('msjFilecin1').style.cssText="display: block; color: red";
+    };
+
+    function siTodoBien2(nombre){
+        document.getElementById('namecin').innerHTML = nombre;
+        document.getElementById('msgcin1').style.cssText="display: none";
+        document.getElementById('msjFilecin1').style.cssText="display: none";
+    }
 </script>
 @endsection 

@@ -38,7 +38,13 @@
               <span class="sr-only">(current)</span>
             </a>
           </li>
-          <li class="nav-item">
+
+
+
+      
+            @guest
+            @if (Route::has('register'))
+             <li class="nav-item">
             <a class="nav-link" href="{{ url('/DemandeMedicaments') }}">Demande des médicaments</a>
           </li>
           <li class="nav-item">
@@ -46,23 +52,32 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{ url('/Contact') }}">Contact</a>
-        
-
-
-          <li class="nav-item dropdown">
+          </li>
+                <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Pharmacie
         </a>
+
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            @guest
-            @if (Route::has('register'))
           <a class="dropdown-item" href="{{ route('register') }}">Créer un compte</a>
-          @endif
           <a class="dropdown-item" href="{{ route('login') }}">Se connecter</a>
+       </div>
+        </li>
+
+          @endif
            @else
+                        <li class="nav-item">
+            <a class="nav-link" href="{{ url('/ListeDemandes/').'/'.Auth::user()->id }}">Liste des demandes </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url('/Services') }}">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url('/Contact') }}">Contact</a>
+          </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                    {{ Auth::user()->telephone_fixe }} <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -78,8 +93,7 @@
                                 </div>
                             </li>
                         @endguest
-        </div>
-      </li>
+      
         </ul>
       </div>
     </div>

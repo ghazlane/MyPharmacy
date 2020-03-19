@@ -32,6 +32,11 @@ class PharmacieController extends Controller
         //
     }
 
+    public function nouveauDemande(Request $request){
+        echo "you are here";
+        return view('home'); 
+    }
+
     /**
      * Store a newly created resource in storage.
      *

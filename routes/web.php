@@ -25,5 +25,11 @@ Route::get('/Accueil', function(){
 
 Route::get('/DemandeMedicaments', 'PharmacieController@getListVille'); 
 Route::resource('demandeMedicaments', 'DemandeController');
-Route::get('/ListeDemandes/{id}', 'DemandeController@getListDemandeByIdPharmacie'); 
+Route::get('/ListeDemandes/{id}', 'DemandeController@getListDemandeByIdPharmacie');
+Route::get('/viewCin/{name}', 'DemandeController@getCin');
+Route::get('/viewOrdonnance/{name}', 'DemandeController@getOrdonnance');
+
+Route::get('/deleteDemande/{id}', 'DemandeController@deleteDemande'); 
+Route::get('/validateDemande/{id}', 'DemandeController@validateDemande'); 
+ 
 

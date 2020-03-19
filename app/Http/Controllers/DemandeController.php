@@ -151,6 +151,13 @@ else if($jours_rendezvous == 6){
         //
     }
 
+    public function getCin($name){
+
+    }
+    public function getOrdonnance($name){
+
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -189,5 +196,12 @@ else if($jours_rendezvous == 6){
          $listeDemande = $this->demandeMedicaments->getListDemandeByIdPharmacie($id); 
         // echo $listeDemande;
          return view('listeDemande', compact('listeDemande')); 
+    }
+
+    public function deleteDemande(){
+
+    }
+    public function validateDemande(){
+
     }
 }

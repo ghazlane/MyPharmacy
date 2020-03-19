@@ -27,9 +27,7 @@ class DemandeMedicaments extends Model
     public function getListDemandeByIdPharmacie($id){
     	//App\Flight::where('active', 1)
     	   $resultat = DemandeMedicaments::where('id_pharmacie', $id)->orderBy('heure_retour', 'desc')->get();
-    	   foreach ($resultat as $ligne) {
-    	   	$ligne->cin = download(public_path()."\\file\\cin\\".$ligne->cin); 
-    	   }
+    	   
     	   return $resultat ; 
     }
 }

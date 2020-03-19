@@ -19,7 +19,7 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="{{ url('Accueil') }}">Ma pharmacie</a>
+      <a class="navbar-brand" style="color : #4EF334;" href="{{ url('Accueil') }}"><img src="{{asset('logo/logo.png')}}" alt="" style="width: 35px; height: 35px; padding:0 ; margin: 0;"> &nbsp;Ma pharmacie</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -54,28 +54,23 @@
        </div>
         </li>
         @else
-                       
-         
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+             <li class="nav-item dropdown">
+                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->telephone_fixe }} <span class="caret"></span>
-                                </a>
+                </a>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
-                                    </a>
+                    </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
-                                    </form>
-                                </div>
-                            </li>
-                            @endif
-                        
-      
+                    </form>
+                </div>
+               </li>
+        @endif
         </ul>
       </div>
     </div>
@@ -83,71 +78,54 @@
 <br><br><br>
   <!-- Page Content -->
   <div class="container">
-
      <main class="py-4">
             @yield('content')
         </main>
-
-
   </div>
-  <!-- /.container -->
-
-  <!-- Footer -->
  <footer class="footer-distributed">
-
       <div class="footer-left">
-
-        <h3>Company<span>logo</span></h3>
-
+        <h3>Ma<span style="color: green;">Pharmacie </span></h3>
         <p class="footer-links">
-          <a href="#">Home</a>
+          <a href="{{ url('/Accueil') }}">Accueil</a>
           ·
-          <a href="#">Blog</a>
+           @if(auth()->guest())
+          <a href="{{ url('/ListeDemandes')}}">Demande des médicaments</a>
+          @else
+          <a href="{{ url('/DemandeMedicaments') }}">Liste des demandes</a>
+          @endif
+          .
+          <a href="{{ url('/Services') }}">Services</a>
           ·
-          <a href="#">Pricing</a>
-          ·
-          <a href="#">About</a>
-          ·
-          <a href="#">Faq</a>
-          ·
-          <a href="#">Contact</a>
+          <a href="{{ url('/Contact') }}">Contact</a>
         </p>
-
-        <p class="footer-company-name">Company Name &copy; 2015</p>
+        <p class="footer-company-name">Tous droits réservés &copy; 2020</p>
       </div>
 
       <div class="footer-center">
-
         <div>
           <i class="fa fa-map-marker"></i>
-          <p><span>21 Revolution Street</span> Paris, France</p>
+          <p><span>Ma pharmacie </span> Casablanca, Maroc</p>
         </div>
-
         <div>
           <i class="fa fa-phone"></i>
-          <p>+1 555 123456</p>
+          <p>(+212) 06 04 68 01 73</p>
         </div>
-
         <div>
           <i class="fa fa-envelope"></i>
-          <p><a href="mailto:support@company.com">support@company.com</a></p>
+          <p><a href="mailto:support@company.com">mapharmacie@gmail.com</a></p>
         </div>
-
       </div>
-
       <div class="footer-right">
-
         <p class="footer-company-about">
-          <span>About the company</span>
-          Lorem ipsum dolor sit amet, consectateur adispicing elit. Fusce euismod convallis velit, eu auctor lacus vehicula sit amet.
+          <img src="{{asset('logo/logo.png')}}" alt="" style="width: 120px; height: 150px; padding:0 ; margin: 0;">
         </p>
 
         <div class="footer-icons">
 
           <a href="#"><i class="fa fa-facebook"></i></a>
           <a href="#"><i class="fa fa-twitter"></i></a>
-          <a href="#"><i class="fa fa-linkedin"></i></a>
-          <a href="#"><i class="fa fa-github"></i></a>
+          <a href="#"><i class="fa fa-instagram"></i></a>
+          <a href="https://pharmacie.ma/"><i class="fa fa-plus"></i></a>
 
         </div>
 

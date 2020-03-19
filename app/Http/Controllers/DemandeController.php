@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\DemandeMedicaments; 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class DemandeController extends Controller
 {
@@ -192,16 +193,22 @@ else if($jours_rendezvous == 6){
         //
     }
 
-    public function getListDemandeByIdPharmacie($id){
-         $listeDemande = $this->demandeMedicaments->getListDemandeByIdPharmacie($id); 
+    public function getListDemandeByIdPharmacie(){
+         $listeDemande = $this->demandeMedicaments->getListDemandeByIdPharmacie(Auth::id()); 
         // echo $listeDemande;
          return view('listeDemande', compact('listeDemande')); 
     }
 
-    public function deleteDemande(){
-
+    public function deleteDemande($id){
+        $listeDemande = $this->demandeMedicaments->deleteDemande($id); 
+        $listeDemande = $this->demandeMedicaments->getListDemandeByIdPharmacie(Auth::id()); 
+        // echo $listeDemande;
+         return view('listeDemande', compact('listeDemande')); 
     }
-    public function validateDemande(){
-
+    public function validateDemande($id){
+        $listeDemande = $this->demandeMedicaments->validateDemande($id);
+        $listeDemande = $this->demandeMedicaments->getListDemandeByIdPharmacie(Auth::id()); 
+        // echo $listeDemande;
+         return view('listeDemande', compact('listeDemande')); 
     }
 }

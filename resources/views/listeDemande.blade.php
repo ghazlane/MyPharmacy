@@ -51,7 +51,15 @@
      @foreach($listeDemande as $ligne)
       <tr>
         <td>{{$ligne->date_demande}}</td>
-        <td>{{$ligne->etat_demande}}</td>              
+        <td><center>
+          @if($ligne->etat_demande == 'Prête')
+          <button type="button" class="btn btn-success btn-sm">Prête</button>
+          
+          @else 
+          <button type="button" class="btn btn-info btn-sm">En cours</button>
+          @endif
+          </center>
+        </td>              
         <td>{{$ligne->heure_retour}}</td>
         <!-- <td> <a href="{{url('viewCin/'.$ligne->cin) }}">cin</a></td>-->
         

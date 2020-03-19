@@ -30,4 +30,12 @@ class DemandeMedicaments extends Model
     	   
     	   return $resultat ; 
     }
+
+    public function deleteDemande($id){
+    	DemandeMedicaments::where('id_demande', $id)->delete(); 
+
+    }
+    public function validateDemande($id){
+    	DemandeMedicaments::where('id_demande', $id)->update(['etat_demande'=>'Prête']); 
+    }
 }

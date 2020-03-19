@@ -67,7 +67,7 @@
           @endif
            @else
                         <li class="nav-item">
-            <a class="nav-link" href="{{ url('/ListeDemandes/').'/'.Auth::user()->id }}">Liste des demandes </a>
+            <a class="nav-link" href="{{ url('/ListeDemandes')}}">Liste des demandes </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{ url('/Services') }}">Services</a>

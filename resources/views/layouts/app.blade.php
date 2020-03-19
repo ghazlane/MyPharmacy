@@ -9,21 +9,13 @@
   <meta name="author" content="">
 
   <title>Ma pharmacie</title>
-
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
-  <!-- Custom styles for this template -->
-  <link href="css/heroic-features.css" rel="stylesheet">
-
-  
-<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.1/animate.min.css'>
-<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css'>
-
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.1/animate.min.css'>
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css'>
+  <link rel="stylesheet" type="text/css" href="{{asset('css/footer.css')}}">
 </head>
-
 <body>
-
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
@@ -33,48 +25,37 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="{{ url('/Accueil') }}">Accueil
-              <span class="sr-only">(current)</span>
-            </a>
+          <li class="nav-item {{(Request::segment(1) == 'Accueil' ) ? 'active' : null }}">
+            <a class="nav-link" href="{{ url('/Accueil') }}">Accueil</a>
           </li>
-
-
-
-      
-            @guest
-            @if (Route::has('register'))
-             <li class="nav-item">
+            @if(auth()->guest())
+             <li class="nav-item {{(Request::segment(1) == 'DemandeMedicaments') ? 'active' : null }}">
             <a class="nav-link" href="{{ url('/DemandeMedicaments') }}">Demande des médicaments</a>
           </li>
-          <li class="nav-item">
+          @else
+           <li class="nav-item {{(Request::segment(1) == 'ListeDemandes') ? 'active' : null }}">
+            <a class="nav-link" href="{{ url('/ListeDemandes')}}">Liste des demandes</a>
+          </li>
+          @endif
+          <li class="nav-item {{(Request::segment(1) == 'Services') ? 'active' : null }}">
             <a class="nav-link" href="{{ url('/Services') }}">Services</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item {{(Request::segment(1) == 'Contact') ? 'active' : null }}">
             <a class="nav-link" href="{{ url('/Contact') }}">Contact</a>
           </li>
-                <li class="nav-item dropdown">
+          @if(auth()->guest())
+      <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Pharmacie
         </a>
-
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="{{ route('register') }}">Créer un compte</a>
           <a class="dropdown-item" href="{{ route('login') }}">Se connecter</a>
        </div>
         </li>
-
-          @endif
-           @else
-                        <li class="nav-item">
-            <a class="nav-link" href="{{ url('/ListeDemandes')}}">Liste des demandes </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url('/Services') }}">Services</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url('/Contact') }}">Contact</a>
-          </li>
+        @else
+                       
+         
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->telephone_fixe }} <span class="caret"></span>
@@ -92,7 +73,8 @@
                                     </form>
                                 </div>
                             </li>
-                        @endguest
+                            @endif
+                        
       
         </ul>
       </div>
@@ -111,12 +93,67 @@
   <!-- /.container -->
 
   <!-- Footer -->
-  <footer class="py-5 bg-dark">
-    <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
-    </div>
-    <!-- /.container -->
-  </footer>
+ <footer class="footer-distributed">
+
+      <div class="footer-left">
+
+        <h3>Company<span>logo</span></h3>
+
+        <p class="footer-links">
+          <a href="#">Home</a>
+          ·
+          <a href="#">Blog</a>
+          ·
+          <a href="#">Pricing</a>
+          ·
+          <a href="#">About</a>
+          ·
+          <a href="#">Faq</a>
+          ·
+          <a href="#">Contact</a>
+        </p>
+
+        <p class="footer-company-name">Company Name &copy; 2015</p>
+      </div>
+
+      <div class="footer-center">
+
+        <div>
+          <i class="fa fa-map-marker"></i>
+          <p><span>21 Revolution Street</span> Paris, France</p>
+        </div>
+
+        <div>
+          <i class="fa fa-phone"></i>
+          <p>+1 555 123456</p>
+        </div>
+
+        <div>
+          <i class="fa fa-envelope"></i>
+          <p><a href="mailto:support@company.com">support@company.com</a></p>
+        </div>
+
+      </div>
+
+      <div class="footer-right">
+
+        <p class="footer-company-about">
+          <span>About the company</span>
+          Lorem ipsum dolor sit amet, consectateur adispicing elit. Fusce euismod convallis velit, eu auctor lacus vehicula sit amet.
+        </p>
+
+        <div class="footer-icons">
+
+          <a href="#"><i class="fa fa-facebook"></i></a>
+          <a href="#"><i class="fa fa-twitter"></i></a>
+          <a href="#"><i class="fa fa-linkedin"></i></a>
+          <a href="#"><i class="fa fa-github"></i></a>
+
+        </div>
+
+      </div>
+
+    </footer>
 
   <!-- Bootstrap core JavaScript-->
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

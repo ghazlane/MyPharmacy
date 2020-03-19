@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
-
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css'>
   <div class="container py-3">
     <div class="row">

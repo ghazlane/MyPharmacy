@@ -3,6 +3,11 @@
 @section('content')
 
 <br><br><br>
+
+  <div class="container">
+
+     <main class="py-4">
+        
 <div class="card text-center">
   <div class="card-header">
    <strong> votre demande est prise en charge</strong> 
@@ -19,6 +24,7 @@
    <strong> {{$id_last_demande}}</strong>
   </div>
 </div>
-
+</main>
+  </div>
 
 @endsection 

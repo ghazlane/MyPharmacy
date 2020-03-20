@@ -37,9 +37,11 @@
             <a class="nav-link" href="{{ url('/ListeDemandes')}}">Liste des demandes</a>
           </li>
           @endif
+          <!--
           <li class="nav-item {{(Request::segment(1) == 'Services') ? 'active' : null }}">
             <a class="nav-link" href="{{ url('/Services') }}">Services</a>
           </li>
+        -->
           <li class="nav-item {{(Request::segment(1) == 'Contact') ? 'active' : null }}">
             <a class="nav-link" href="{{ url('/Contact') }}">Contact</a>
           </li>
@@ -90,9 +92,9 @@
           @else
           <a href="{{ url('/DemandeMedicaments') }}">Liste des demandes</a>
           @endif
-          .
+         <!-- .
           <a href="{{ url('/Services') }}">Services</a>
-          ·
+          -->·
           <a href="{{ url('/Contact') }}">Contact</a>
         </p>
         <p class="footer-company-name">Tous droits réservés &copy; 2020</p>

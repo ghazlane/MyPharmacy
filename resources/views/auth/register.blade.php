@@ -83,12 +83,7 @@
     </style>
 
 <div class="container">
-     <div class="jumbotron jumbotron-fluid">
-  <div class="container">
-    <h1 class="display-4">Fluid jumbotron</h1>
-    <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
-  </div>
-</div>
+    <br><br>
     <div class="row justify-content-center">
         <div class="col-md-10" >
             <div class="card">
@@ -123,7 +118,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="categorie" class="col-md-4 col-form-label text-md-right">{{ __('categorie') }}</label>
+                            <label for="categorie" class="col-md-4 col-form-label text-md-right">{{ __('Catégorie') }}</label>
 
                             <div class="col-md-6">
                                 <input id="categorie" type="text" class="form-control @error('categorie') is-invalid @enderror" name="categorie" value="{{ old('categorie') }}" required autocomplete="categorie">
@@ -137,7 +132,7 @@
                         </div>
 
                            <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Mot de passe ') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
@@ -150,7 +145,7 @@
                             </div>
                         </div>
                                                 <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirler mot de passe') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
@@ -159,11 +154,23 @@
 
 
        <div class="form-group row">
-                            <label for="ville" class="col-md-4 col-form-label text-md-right">{{ __('Ville') }}</label>
+                            <label for="ville" class="col-md-4 col-form-label text-md-right">{{ __('Ville ou Région') }}</label>
 
                             <div class="col-md-6">
-                                <input id="ville" type="text" class="form-control @error('ville') is-invalid @enderror" name="ville" value="{{ old('ville') }}" required autocomplete="ville">
-
+                                  <select id="ville" type="text" class="form-control @error('ville') is-invalid @enderror" name="ville" value="{{ old('ville') }}" required autocomplete="ville">
+                                    <option value="Tanger-Tétouan-Al Hoceïma">Tanger-Tétouan-Al Hoceïma</option>
+                                    <option value="Oriental">Oriental </option>
+                                    <option value="Fès-Meknès">Fès-Meknès</option>
+                                    <option value="Rabat-Salé-Kénitra">Rabat-Salé-Kénitra</option>
+                                    <option value="Béni Mellal-Khénifra">Béni Mellal-Khénifra</option>
+                                    <option value="Casablanca-Settat">Casablanca-Settat</option>
+                                    <option value="Marrakech-Safi">Marrakech-Safi</option>
+                                    <option value="Drâa-Tafilalet">Drâa-Tafilalet</option>
+                                    <option value="Souss-Massa">Souss-Massa</option>
+                                    <option value="Guelmim-Oued Noun">Guelmim-Oued Noun</option>
+                                    <option value="Laâyoune-Sakia El Hamra">Laâyoune-Sakia El Hamra</option>
+                                    <option value="Dakhla-Oued Ed Dahab">Dakhla-Oued Ed Dahab</option>
+                                </select>
                                 @error('ville')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -171,19 +178,12 @@
                                 @enderror
                             </div>
                         </div>
+               
 
 
+                                <input id="localisation_d" type="text" class="form-control @error('localisation_d') is-invalid @enderror" name="localisation_d" value="{{ old('localisation_d') }}" required autocomplete="localisation_d" autofocus hidden="true">
 
-
-
-                 
-
-
-                                <input id="localisation_d" type="text" class="form-control @error('localisation_d') is-invalid @enderror" name="localisation_d" value="{{ old('localisation_d') }}" required autocomplete="localisation_d" autofocus>
-
-                            
-
-                                <input id="localisation_g" type="text" class="form-control @error('localisation_g') is-invalid @enderror" name="localisation_g" value="{{ old('localisation_g') }}" required autocomplete="localisation_g" autofocus>
+                                <input id="localisation_g" type="text" hidden="true" class="form-control @error('localisation_g') is-invalid @enderror" name="localisation_g" value="{{ old('localisation_g') }}" required autocomplete="localisation_g" autofocus>
                             
 <br> 
 <div style="width: 100%; height: 500px;">
@@ -191,24 +191,20 @@
     <div class="pac-card" id="pac-card">
       <div>
         <div id="title">
-          Autocomplete search
+          Adresse de la pharmacie
         </div>
         <div id="type-selector" class="pac-controls">
           <input type="radio" name="type" id="changetype-all" checked="checked">
-          <label for="changetype-all">All</label>
+          <label for="changetype-all">Tous</label>
 
-          <input type="radio" name="type" id="changetype-establishment">
-          <label for="changetype-establishment">Establishments</label>
+          <label for="changetype-establishment" hidden="true">Establishments</label>
 
-          <input type="radio" name="type" id="changetype-address">
-          <label for="changetype-address">Addresses</label>
+          <label for="changetype-address" hidden="true">Addresses</label>
 
-          <input type="radio" name="type" id="changetype-geocode">
-          <label for="changetype-geocode">Geocodes</label>
+          <label for="changetype-geocode" hidden="true">Geocodes</label>
         </div>
         <div id="strict-bounds-selector" class="pac-controls">
-          <input type="checkbox" id="use-strict-bounds" value="">
-          <label for="use-strict-bounds">Strict Bounds</label>
+          <label for="use-strict-bounds" hidden="true">Strict Bounds</label>
         </div>
       </div>
       <div id="pac-container">

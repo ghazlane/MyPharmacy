@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+
+<br><br><br>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,8 +35,9 @@
 <body>
 
 <div class="container">
-  <p>Type something in the input field to search the table for first names, last names or emails:</p>  
-  <input class="form-control" id="myInput" type="text" placeholder="Search..">
+<center>  <h1 style="color: blue; ">Liste des demandes</h1></center> <br> <center>
+  <input class="form-control" id="myInput" type="text" placeholder="Chercher une demande " style="width: 50%;">
+  </center>
   <br>
   <table class="table table-bordered table-striped">
     <thead>

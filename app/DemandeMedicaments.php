@@ -27,7 +27,7 @@ class DemandeMedicaments extends Model
     public function getListDemandeByIdPharmacie($id){
     	//App\Flight::where('active', 1)
     	   $resultat = DemandeMedicaments::where('id_pharmacie', $id)->orderBy('heure_retour', 'desc')->get();
-    	   
+    	   //'heure_retour', 'like', '%' .date('Y-m-d', time()). '%'
     	   return $resultat ; 
     }
 

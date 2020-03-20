@@ -194,21 +194,27 @@ else if($jours_rendezvous == 6){
     }
 
     public function getListDemandeByIdPharmacie(){
+        if (Auth::check()) {
          $listeDemande = $this->demandeMedicaments->getListDemandeByIdPharmacie(Auth::id()); 
         // echo $listeDemande;
-         return view('listeDemande', compact('listeDemande')); 
+         return view('listeDemande', compact('listeDemande'));
+         }else return view('auth.login'); 
     }
 
     public function deleteDemande($id){
+        if (Auth::check()) {
         $listeDemande = $this->demandeMedicaments->deleteDemande($id); 
         $listeDemande = $this->demandeMedicaments->getListDemandeByIdPharmacie(Auth::id()); 
         // echo $listeDemande;
-         return view('listeDemande', compact('listeDemande')); 
+         return view('listeDemande', compact('listeDemande'));
+         }else return view('auth.login');
     }
     public function validateDemande($id){
+        if (Auth::check()) {
         $listeDemande = $this->demandeMedicaments->validateDemande($id);
         $listeDemande = $this->demandeMedicaments->getListDemandeByIdPharmacie(Auth::id()); 
         // echo $listeDemande;
          return view('listeDemande', compact('listeDemande')); 
+        }else return view('auth.login');
     }
 }

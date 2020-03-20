@@ -131,6 +131,8 @@
                             </div>
                         </div>
 
+                       
+
                            <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Mot de passe ') }}</label>
 
@@ -151,6 +153,8 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
+
+                        
 
 
        <div class="form-group row">
@@ -178,157 +182,37 @@
                                 @enderror
                             </div>
                         </div>
+
+                        <div class="form-group row">
+                            <label for="categorie" class="col-md-4 col-form-label text-md-right">{{ __('Adresse compléte ') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="adresse" type="text" class="form-control @error('adresse') is-invalid @enderror" name="adresse" value="{{ old('adresse') }}" required autocomplete="adresse">
+
+                                @error('adresse')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
                
 
 
-                                <input id="localisation_d" type="text" class="form-control @error('localisation_d') is-invalid @enderror" name="localisation_d" value="{{ old('localisation_d') }}" required autocomplete="localisation_d" autofocus hidden="true">
+                                <input id="localisation_d" type="text" class="form-control @error('localisation_d') is-invalid @enderror" name="localisation_d" autocomplete="localisation_d" autofocus hidden="true" value="0.0">
 
-                                <input id="localisation_g" type="text" hidden="true" class="form-control @error('localisation_g') is-invalid @enderror" name="localisation_g" value="{{ old('localisation_g') }}" required autocomplete="localisation_g" autofocus>
+                                <input id="localisation_g" type="text" hidden="true" class="form-control @error('localisation_g') is-invalid @enderror" name="localisation_g"  autocomplete="localisation_g" autofocus value="0.0">
+
+                                
                             
-<br> 
-<div style="width: 100%; height: 500px;">
-    
-    <div class="pac-card" id="pac-card">
-      <div>
-        <div id="title">
-          Adresse de la pharmacie
-        </div>
-        <div id="type-selector" class="pac-controls">
-          <input type="radio" name="type" id="changetype-all" checked="checked">
-          <label for="changetype-all">Tous</label>
 
-          <label for="changetype-establishment" hidden="true">Establishments</label>
-
-          <label for="changetype-address" hidden="true">Addresses</label>
-
-          <label for="changetype-geocode" hidden="true">Geocodes</label>
-        </div>
-        <div id="strict-bounds-selector" class="pac-controls">
-          <label for="use-strict-bounds" hidden="true">Strict Bounds</label>
-        </div>
-      </div>
-      <div id="pac-container">
-        <input id="pac-input" type="text"
-            placeholder="Enter a location" name="adresse">
-      </div>
-    </div>
-    <div id="map"></div>
-    <div id="infowindow-content">
-      <img src="" width="16" height="16" id="place-icon">
-      <span id="place-name"  class="title"></span><br>
-      <span id="place-address"></span>
-    </div>
-
-    <script>
-      // This example requires the Places library. Include the libraries=places
-      // parameter when you first load the API. For example:
-      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
-
-      function initMap() {
-        var map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: -33.8688, lng: 151.2195},
-          zoom: 13
-        });
-        var card = document.getElementById('pac-card');
-        var input = document.getElementById('pac-input');
-        var types = document.getElementById('type-selector');
-        var strictBounds = document.getElementById('strict-bounds-selector');
-        var options = {
-  types: ['(cities)'],
-  componentRestrictions: {country: "ma"}
- };
-
-        map.controls[google.maps.ControlPosition.TOP_RIGHT].push(card);
-
-        var autocomplete = new google.maps.places.Autocomplete(input,options);
-
-        // Bind the map's bounds (viewport) property to the autocomplete object,
-        // so that the autocomplete requests use the current map bounds for the
-        // bounds option in the request.
-        autocomplete.bindTo('bounds', map);
-
-        // Set the data fields to return when the user selects a place.
-        autocomplete.setFields(
-            ['address_components', 'geometry', 'icon', 'name']);
-
-        var infowindow = new google.maps.InfoWindow();
-        var infowindowContent = document.getElementById('infowindow-content');
-        infowindow.setContent(infowindowContent);
-        var marker = new google.maps.Marker({
-          map: map,
-          anchorPoint: new google.maps.Point(0, -29)
-        });
-
-        autocomplete.addListener('place_changed', function() {
-          infowindow.close();
-          marker.setVisible(false);
-          var place = autocomplete.getPlace();
-          if (!place.geometry) {
-            // User entered the name of a Place that was not suggested and
-            // pressed the Enter key, or the Place Details request failed.
-            window.alert("No details available for input: '" + place.name + "'");
-            return;
-          }
-
-          // If the place has a geometry, then present it on a map.
-          if (place.geometry.viewport) {
-            map.fitBounds(place.geometry.viewport);
-          } else {
-            map.setCenter(place.geometry.location);
-            map.setZoom(17);  // Why 17? Because it looks good.
-          }
-          marker.setPosition(place.geometry.location);
-            document.getElementById('localisation_d').value = place.geometry.location.lng(); 
-            document.getElementById('localisation_g').value = place.geometry.location.lat(); 
-          marker.setVisible(true);
-
-          var address = '';
-          if (place.address_components) {
-            address = [
-              (place.address_components[0] && place.address_components[0].short_name || ''),
-              (place.address_components[1] && place.address_components[1].short_name || ''),
-              (place.address_components[2] && place.address_components[2].short_name || '')
-            ].join(' ');
-          }
-
-          infowindowContent.children['place-icon'].src = place.icon;
-          infowindowContent.children['place-name'].textContent = place.name;
-          infowindowContent.children['place-address'].textContent = address;
-          infowindow.open(map, marker);
-        });
-
-        // Sets a listener on a radio button to change the filter type on Places
-        // Autocomplete.
-        function setupClickListener(id, types) {
-          var radioButton = document.getElementById(id);
-          radioButton.addEventListener('click', function() {
-            autocomplete.setTypes(types);
-          });
-        }
-
-        setupClickListener('changetype-all', []);
-        setupClickListener('changetype-address', ['address']);
-        setupClickListener('changetype-establishment', ['establishment']);
-        setupClickListener('changetype-geocode', ['geocode']);
-
-        document.getElementById('use-strict-bounds')
-            .addEventListener('click', function() {
-              console.log('Checkbox clicked! New state=' + this.checked);
-              autocomplete.setOptions({strictBounds: this.checked});
-            });
-      }
-    </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_gxHxXr6QeB71Nfqrgzkrd6zqrH_JBu8&libraries=places&callback=initMap"
-        async defer></script>
-</div>
-
-                     <br><br>   <div class="form-group row mb-0">
+                     <br>  <center><div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    <center>{{ __('Créer un compte') }}</center>
+                                    {{ __('Créer un compte') }}
                                 </button>
                             </div>
-                        </div>
+                        </div></center>
                     </form>
                 </div>
             </div>

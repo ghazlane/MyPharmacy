@@ -51,6 +51,7 @@
       </tr>
     </thead>
     <tbody id="myTable">
+      
      @foreach($listeDemande as $ligne)
       <tr>
         <td>{{$ligne->date_demande}}</td>
@@ -79,35 +80,35 @@
         </center>
       </td>
       </tr>
+
+      
     @endforeach
     </tbody>
   </table>
  
 
 </div>
-
-<!-- Large modal -->
-
-<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" >
   <div class="modal-dialog modal-lg">
     <div class="modal-content" >
-      <div class="img-magnifier-container" style="margin: auto;">
-          <img id="myimage" src="{{ asset('file/cin/'.$ligne->cin) }}">
+      <div class="img-magnifier-container" style="margin: auto;" >
+          <img id="myimage" src="{{ asset('file/cin/'.$ligne->cin) }}" style="max-width: 900px;">
       </div>
     </div>
   </div>
 </div>
 
 
-<div class="modal fade bd-example-modal-lg2" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div class="modal fade bd-example-modal-lg2" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" >
   <div class="modal-dialog modal-lg">
     <div class="modal-content" >
-      <div class="img-magnifier-container" style="margin: auto;">
-          <img id="myimage2" src="{{ asset('file/cin/'.$ligne->cin) }}" >
+      <div class="img-magnifier-container" style="margin: auto; ">
+          <img id="myimage2" src="{{ asset('file/cin/'.$ligne->cin) }}" style="max-width: 900px;">
       </div>
     </div>
   </div>
 </div>
+
 
 
 <script>

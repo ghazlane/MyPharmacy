@@ -32,6 +32,11 @@
              <li class="nav-item {{(Request::segment(1) == 'DemandeMedicaments') ? 'active' : null }}">
             <a class="nav-link" href="{{ url('/DemandeMedicaments') }}">Demande des médicaments</a>
           </li>
+          <!--
+          <li class="nav-item {{(Request::segment(1) == 'mademande') ? 'active' : null }}">
+            <a class="nav-link" href="{{ url('/mademande') }}">Mes demandes</a>
+          </li>
+        -->
           @else
            <li class="nav-item {{(Request::segment(1) == 'ListeDemandes') ? 'active' : null }}">
             <a class="nav-link" href="{{ url('/ListeDemandes')}}">Liste des demandes</a>
@@ -64,7 +69,7 @@
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('Se déconnecter') }}
                     </a>
 
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

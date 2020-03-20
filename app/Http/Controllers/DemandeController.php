@@ -73,6 +73,9 @@ class DemandeController extends Controller
         }
         $demandeMedicaments->etat_demande = 'En cours'; 
         $date_maximale = $this->demandeMedicaments->getMaxDate($request->id_pharmacie); 
+        if($date_maximale == null) {
+            $date_maximale = new DemandeMedicaments(); 
+            $date_maximale->heure_retour = '2010-10-10 10:10:10';}
         //string to date
         $lastDateInTable = date('Y-m-d H:i:s',strtotime($date_maximale->heure_retour));
 

@@ -35,6 +35,9 @@ Route::get('/validateDemande/{id}', 'DemandeController@validateDemande');
 Route::get('/Contact', function(){
 	return view('Contact'); 
 });
-Route::resource('contact', 'ContactController'); 
+Route::resource('contact', 'ContactController');
+Route::get('/mademande', function(){
+	return view('mademande'); 
+}); 
  
 

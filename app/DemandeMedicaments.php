@@ -26,8 +26,11 @@ class DemandeMedicaments extends Model
 
     public function getListDemandeByIdPharmacie($id){
     	//App\Flight::where('active', 1)
-    	   $resultat = DemandeMedicaments::where('id_pharmacie', $id)->orderBy('heure_retour', 'desc')->get();
+    	$dateAujourdhui = '%'.date('Y-m-d', time()).'%' ; 
+    	//echo "<br><br><br>".$dateAujourdhui;
+    	   $resultat = DemandeMedicaments::where('id_pharmacie', $id)->where('heure_retour', 'like',$dateAujourdhui)->orderBy('heure_retour', 'desc')->get();
     	   //'heure_retour', 'like', '%' .date('Y-m-d', time()). '%'
+    	   if($resultat == null) return new DemandeMedicaments(); 
     	   return $resultat ; 
     }
 

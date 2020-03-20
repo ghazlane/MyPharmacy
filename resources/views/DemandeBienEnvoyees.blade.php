@@ -2,6 +2,7 @@
 
 @section('content')
 
+<br><br><br>
 <div class="card text-center">
   <div class="card-header">
    <strong> votre demande est prise en charge</strong> 
@@ -14,7 +15,7 @@
     <p class="card-text">Si vous avez des questions contactez-nous.</p>
     <a href="{{url('/Contact') }}" class="btn btn-primary">Contactez-nous</a>
   </div>
-  <div class="card-footer text-muted">Pour plus d'information sur votre demande utilisé le numéro suivant : 
+  <div class="card-footer text-muted">Pour plus d'informations sur votre demande utilisé le numéro suivant : 
    <strong> {{$id_last_demande}}</strong>
   </div>
 </div>

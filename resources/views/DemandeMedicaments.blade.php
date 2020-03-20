@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<br><br>
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css'>
   <div class="container py-3">
     <div class="row">
@@ -14,10 +15,10 @@
                             <form class="form" role="form" method="POST" action="{{ route('demandeMedicaments.store') }}" enctype="multipart/form-data" >
                                @csrf
                                 <div class="form-group row">
-                                    <label class="col-lg-3 col-form-label form-control-label">Ville</label>
+                                    <label class="col-lg-3 col-form-label form-control-label">Ville ou Région</label>
                                     <div class="col-lg-9">
                                         <select class="form-control" id="listeVille">
-                                           <option>-- choisir une ville -- </option>
+                                           <option value="null">-- choisir une ville -- </option>
                                           @foreach($resultat as $ligne)
                                            <option>{{$ligne->ville}}</option>
                                             @endforeach
@@ -28,30 +29,28 @@
                                     <label class="col-lg-3 col-form-label form-control-label">Choisissez votre Pharmacie</label>
                                     <div class="col-lg-9">
                                          <select class="form-control js-example-basic-single" id="listeAdresse" name="id_pharmacie">
-                                          
-     
     </select>
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label class="col-lg-3 col-form-label form-control-label">Numéro de la carte d'identité nationale ( CIN ) </label>
+                                <div class="form-group row" title="Une image de votre quarte d'identité nationale">
+                                    <label class="col-lg-3 col-form-label form-control-label">Photo de la carte d'identité nationale ( CIN ) </label>
                                     <div class="col-lg-9">
                                        <div class="custom-file">
-          <label class="custom-file-label" id="namecin" for="cininput">Seleccione una imagen</label>
-          <input type="file" accept="image/*" class="custom-file-input" id="cininput" name="cin">
-          <i style="display: none;" id="msgcin1">Formato válido para los archivos: jpg, png, svg.</i>
-          <i style="display: none;" id="msjFilecin1">El peso máximo para el archivo es de: 2M</i>
+          <label class="custom-file-label" id="namecin" for="cininput">Sélectionner une image</label>
+          <input type="file" accept="image/*" class="custom-file-input" id="cininput" name="cin" required="true">
+          <i style="display: none;" id="msgcin1">Formats valides : jpg, png, svg.</i>
+          <i style="display: none;" id="msjFilecin1">L'image ne doit pas dépasser : 4 Mo </i>
             </div>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-lg-3 col-form-label form-control-label">Ordonnance</label>
+                                    <label class="col-lg-3 col-form-label form-control-label">Image de votre ordonnance</label>
                                     <div class="col-lg-9">
                                         <div class="custom-file">
-          <label class="custom-file-label" id="nameFile1" for="customFile1">Seleccione una imagen</label>
-          <input type="file" accept="image/*" class="custom-file-input" id="customFile1" name="ordonnance">
-          <i style="display: none;" id="msjFile1">Formato válido para los archivos: jpg, png, svg.</i>
-          <i style="display: none;" id="msjFilePeso1">El peso máximo para el archivo es de: 2M</i>
+          <label class="custom-file-label" id="nameFile1" for="customFile1">Sélectionner une image</label>
+          <input type="file" accept="image/*" class="custom-file-input" id="customFile1" name="ordonnance" required="true">
+          <i style="display: none;" id="msjFile1">Formats valides : jpg, png, svg.</i>
+          <i style="display: none;" id="msjFilePeso1">L'image ne doit pas dépasser : 4 Mo</i>
             </div>
                                     </div>
                                 </div>
@@ -59,13 +58,11 @@
                                 <center>
                                  <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" onclick="return validationform()" class="btn btn-primary">
                                     {{ __('Envoyer la demande') }}
                                 </button>
                             </div>
-                        </div></center>
-
-                                
+                        </div></center>                                
                               </form>
                             </div>
                           </div>
@@ -96,8 +93,6 @@ $(".remote-loading").select2({
   },
 });
 
-
-
 $("#listeVille" ).change(function() {
   $('#listeAdresse option').remove();
   @foreach($listeAdresse as $ligne)
@@ -106,9 +101,6 @@ $("#listeVille" ).change(function() {
 }
   @endforeach
 });
-
-
-
 
 // Primero capturamos la imagen, o archivo.
     var archivo = document.getElementById('customFile1');
@@ -131,7 +123,7 @@ $("#listeVille" ).change(function() {
         if(exten == 'image/jpeg' || exten == 'image/png' || exten == 'image/svg')
         {
             // Si quieres cambiar el peso máximo para la imagen solo edita los números.
-            if(peso > 2000000)
+            if(peso > 6000000)
             {
                 colorInputImagen();
                 siPesoExede();
@@ -174,8 +166,6 @@ $("#listeVille" ).change(function() {
     }
 
 
-
-
     // Primero capturamos la imagen, o archivo.
     var archivo2 = document.getElementById('cininput');
 
@@ -197,7 +187,7 @@ $("#listeVille" ).change(function() {
         if(exten == 'image/jpeg' || exten == 'image/png' || exten == 'image/svg')
         {
             // Si quieres cambiar el peso máximo para la imagen solo edita los números.
-            if(peso > 2000000)
+            if(peso > 6000000)
             {
                 colorInputImagen2();
                 siPesoExede2();
@@ -237,6 +227,16 @@ $("#listeVille" ).change(function() {
         document.getElementById('namecin').innerHTML = nombre;
         document.getElementById('msgcin1').style.cssText="display: none";
         document.getElementById('msjFilecin1').style.cssText="display: none";
+    }
+
+
+    function validationform(){
+        var selectedCountry = $('#listeVille').children("option:selected"). val();
+        if(selectedCountry == "null"){
+            alert('Merci de sélection une ville ou une région'); 
+            return false ; 
+        }
+        return true ; 
     }
 </script>
 @endsection 

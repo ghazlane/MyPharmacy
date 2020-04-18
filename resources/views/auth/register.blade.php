@@ -117,6 +117,20 @@
                                 @enderror
                             </div>
                         </div>
+                        <div class="form-group row" title="commencez s'il vous plaît par le nom ">
+                            <label for="nom_prenom_pharmacien" class="col-md-4 col-form-label text-md-right">{{ __('Cotre Nom et Prénom') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="nom_prenom_pharmacien" type="text" class="form-control @error('nom_prenom_pharmacien') is-invalid @enderror" name="nom_prenom_pharmacien" value="{{ old('nom_prenom_pharmacien') }}" required autocomplete="nom_prenom_pharmacien" autofocus>
+
+                                @error('nom_prenom_pharmacien')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                       
                         <div class="form-group row">
                             <label for="categorie" class="col-md-4 col-form-label text-md-right">{{ __('Catégorie') }}</label>
 
@@ -147,7 +161,7 @@
                             </div>
                         </div>
                                                 <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirler mot de passe') }}</label>
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirmer mot de passe') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">

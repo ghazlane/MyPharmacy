@@ -52,6 +52,7 @@ class RegisterController extends Controller
             'num_ordre' => ['required', 'string', 'max:255','unique:users'],
             'telephone_fixe' => ['required', 'string', 'min:10', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'nom_prenom_pharmacien' => ['required', 'exists:pharmacies_liste,nom_prenom'],
             'localisation_d'=>['required'], 
             'localisation_g'=>['required'],
             'adresse' =>['required'],
